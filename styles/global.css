@@ -1,0 +1,17 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Helvetica", sans-serif;
+
+  color: #000000;
+  background-color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    color: #ededed;
+    background-color: #121212;
+  }
+}
