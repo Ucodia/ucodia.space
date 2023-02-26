@@ -14,6 +14,7 @@ import fittestBubleBath from "./fittestBubbleBath";
 import circleClock from "./circleClock";
 import lorenz from "./lorenz";
 import cmyDance from "./cmyDance";
+import styled from "styled-components";
 const P5Wrapper = React.lazy(() => import(`../../components/P5Wrapper`));
 
 const u5Sketches = {
@@ -35,9 +36,21 @@ const p5Sketches = {
   "cmy-dance": cmyDance,
 };
 
+const Columns = styled.div`
+  display: grid;
+  grid-template-columns: 800px 800px;
+`;
+
 const wrappedSketches = {};
 for (const key in u5Sketches) {
-  wrappedSketches[key] = <U5Wrapper sketch={u5Sketches[key]} />;
+  wrappedSketches[key] = (
+    <Columns>
+      <U5Wrapper sketch={u5Sketches[key]} />
+      <React.Suspense fallback={<>...</>}>
+        <P5Wrapper sketch={u5Sketches[key]} />
+      </React.Suspense>
+    </Columns>
+  );
 }
 for (const key in p5Sketches) {
   wrappedSketches[key] = (
