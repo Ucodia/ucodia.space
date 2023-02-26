@@ -1,3 +1,5 @@
+import autoStretchP5 from "../../utils/autoStretchP5";
+
 export const meta = {
   name: "Circle Clock",
   created: "2021-10-12",
@@ -14,6 +16,7 @@ const circleClock = (sketch) => {
     sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
     sketch.frameRate(noSeconds ? 1 : 25);
     sketch.noStroke();
+    autoStretchP5(sketch);
   };
 
   sketch.draw = () => {
@@ -85,10 +88,6 @@ const circleClock = (sketch) => {
       sketch.fill(darkBg ? "black" : "white");
       sketch.ellipse(...secondsCenter, secondsR * 2, secondsR * 2);
     }
-  };
-
-  sketch.windowResized = () => {
-    sketch.resizeCanvas(sketch.windowWidth, sketch.windowHeight);
   };
 
   sketch.doubleClicked = () => {
