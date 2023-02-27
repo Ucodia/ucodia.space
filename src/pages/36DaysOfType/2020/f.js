@@ -90,9 +90,8 @@ const f = (sketch) => {
     }
 
     // if (sketch.frameCount < 735) {
-    //   sketch.saveCanvas(
-    //     `${letter}_${sketch.frameCount.toString().padStart(4, "0")}`,
-    //     "png"
+    //   sketch.save(
+    //     `${letter}_${sketch.frameCount.toString().padStart(4, "0")}.png`
     //   );
     // }
   };

@@ -124,7 +124,7 @@ const drawbot001 = (sketch) => {
   }
 
   function capture() {
-    sketch.saveCanvas("frame" + getTimestamp(), "jpg");
+    sketch.save(`frame${getTimestamp()}.jpg`);
   }
 
   sketch.draw = () => {

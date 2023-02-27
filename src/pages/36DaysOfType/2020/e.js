@@ -94,9 +94,8 @@ export default (sketch) => {
     }
 
     // if (sketch.frameCount < segments[0].length) {
-    //   sketch.saveCanvas(
-    //     `${letter}_${sketch.frameCount.toString().padStart(4, "0")}`,
-    //     "png"
+    //   sketch.save(
+    //     `${letter}_${sketch.frameCount.toString().padStart(4, "0")}.png`
     //   );
     // }
   };

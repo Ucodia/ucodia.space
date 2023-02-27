@@ -156,7 +156,7 @@ const area715 = (sketch) => {
 
     if (sketch.keyPressed) {
       if (sketch.key.toLowerCase() === "r")
-        sketch.saveCanvas("capture-" + getTimestamp(), "png");
+        sketch.save(`capture-${getTimestamp()}.png`);
     }
   }
 
