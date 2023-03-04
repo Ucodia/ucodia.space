@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import debounce from "../utils/debounce";
-
 const StyleReset = createGlobalStyle`
   body {
     margin: 0;
@@ -17,14 +15,6 @@ const StyleReset = createGlobalStyle`
     }
   }
 `;
-
-// define and update viewport CSS variable
-const setViewportVariables = () => {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty("--vh", `${vh}px`);
-};
-setViewportVariables();
-window.addEventListener("resize", debounce(setViewportVariables, 400));
 
 const Root = () => (
   <>

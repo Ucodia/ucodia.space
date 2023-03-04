@@ -36,22 +36,18 @@ const Keyword = styled.div`
 `;
 
 const GiphyVox = () => {
-  const [keyword, setKeyword] = useState("");
   const [gifUrl, setGifUrl] = useState("");
   const [transcript, speech] = useSpeechToText();
   useEffect(() => {
-    if (!keyword) return;
+    if (!transcript) return;
 
     async function fetchData() {
-      const response = await giphy.search(keyword);
+      const response = await giphy.search(transcript);
       if (response.data.length === 0) return;
       setGifUrl(response.data[0].images.original.url);
     }
 
     fetchData();
-  }, [keyword]);
-  useEffect(() => {
-    setKeyword(transcript);
   }, [transcript]);
 
   if (!speech) {
@@ -70,11 +66,11 @@ const GiphyVox = () => {
   return (
     <Container>
       {gifUrl ? (
-        <Gif src={gifUrl} alt={`gif for keyword "${keyword}"`} />
+        <Gif src={gifUrl} alt={`gif for keyword "${transcript}"`} />
       ) : (
         <Container />
       )}
-      <Keyword>{keyword ? keyword : "say something..."}</Keyword>
+      <Keyword>{transcript ? transcript : "say something..."}</Keyword>
     </Container>
   );
 };

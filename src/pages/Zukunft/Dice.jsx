@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import styled from "styled-components";
 
 const faceToDots = {
   0: [],
@@ -24,18 +23,10 @@ const faceToDots = {
   "carret-down": [3, 4, 5, 7],
 };
 
-const Surface = styled.g`
-  cursor: pointer;
-`;
-const Outline = styled.rect`
-  fill: transparent;
-  stroke: #333;
-  stroke-width: 1px;
-`;
-const Dot = styled.ellipse`
-  fill: white;
-  stroke: none;
-`;
+const groupStyle = {
+  cursor: "pointer",
+};
+
 const Dice = ({
   face = 1,
   size = 30,
@@ -55,17 +46,25 @@ const Dice = ({
   );
 
   return (
-    <Surface
+    <g
+      style={groupStyle}
       transform={transform}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
-      className={`dice${face}`}
     >
-      <Outline width={size} height={size} rx={size / 5} ry={size / 5} />
+      <rect
+        fill={"none"}
+        stroke={"#333"}
+        strokeWidth={"1px"}
+        width={size}
+        height={size}
+        rx={size / 5}
+        ry={size / 5}
+      />
       {dotsProps.map((dotProps, i) => (
-        <Dot key={i} {...dotProps} />
+        <ellipse fill={"white"} stroke={"none"} key={i} {...dotProps} />
       ))}
-    </Surface>
+    </g>
   );
 };
 

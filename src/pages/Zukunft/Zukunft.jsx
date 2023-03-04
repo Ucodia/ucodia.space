@@ -1,25 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import { withSize } from "react-sizeme";
-// TODO: Replace this library, it does not have a default export...
-// import d3SaveSvg from "d3-save-svg";
 import id from "../../utils/id";
+import downloadSvgElement from "../../utils/downloadSvgElement";
 import Dice from "./Dice";
 
 export const meta = {
   name: "Zukunft",
   created: "2016-04-02",
 };
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: black;
-`;
-const Plot = styled.svg`
-  width: 100%;
-  height: 100%;
-`;
 
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -33,16 +21,19 @@ const createDice = (face = 1, orientation = 0, primary = false) => ({
 const randomDice = () => createDice(randomInt(1, 6), randomInt(0, 1));
 const generateDices = (columns, rows) => {
   const dices = getN(columns * rows, randomDice);
-  const word = "zukunft".split("");
-  const indexStart =
+  const wordAsArray = "zukunft".split("");
+  const wordStart =
     (Math.ceil(rows / 2) - 1) * columns +
-    Math.floor((columns - word.length) / 2);
+    Math.floor((columns - wordAsArray.length) / 2);
 
-  word.forEach((letter, i) => {
-    dices[indexStart + i] = createDice(letter);
+  wordAsArray.forEach((letter, i) => {
+    dices[wordStart + i] = createDice(letter);
   });
+
   return dices;
 };
+
+const fullSizeStyle = { width: "100%", height: "100%" };
 
 const Zukunft = ({ size }) => {
   const svgRef = useRef(null);
@@ -62,17 +53,24 @@ const Zukunft = ({ size }) => {
       return { ...g, dices };
     });
   };
+
   const handleDownloadSvg = () => {
-    // const suggestion = `zukunft-${new Date().getTime()}`;
-    // const filename = prompt("Choose a filename:", suggestion);
-    // if (filename) {
-    //   d3SaveSvg.save(svgRef.current, { filename });
-    // }
+    downloadSvgElement(svgRef.current, `zukunft-${new Date().getTime()}`);
   };
 
   return (
-    <Container>
-      <Plot ref={svgRef}>
+    <div style={fullSizeStyle}>
+      <svg
+        style={fullSizeStyle}
+        viewBox={`0 0 ${size.width} ${size.height}`}
+        ref={svgRef}
+      >
+        <rect
+          fill="black"
+          stroke="none"
+          width={size.width}
+          height={size.height}
+        />
         {grid.dices.map((dice, i) => {
           const x = i % grid.columns;
           const xOff = (size.width - grid.columns * diceSize) / 2;
@@ -99,8 +97,8 @@ const Zukunft = ({ size }) => {
             />
           );
         })}
-      </Plot>
-    </Container>
+      </svg>
+    </div>
   );
 };
 

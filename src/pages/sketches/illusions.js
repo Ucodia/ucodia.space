@@ -9,8 +9,8 @@ const illusions = (sketch) => {
   var n = 3;
   var shapes = [];
   var bands = [];
-  var backColor = 0;
-  var foreColor = 255;
+  var backColor = "black";
+  var foreColor = "white";
   var size = 0;
   var space = 0;
   var speed = 7;
@@ -37,7 +37,6 @@ const illusions = (sketch) => {
   sketch.setup = () => {
     sketch.createCanvas(100, 100);
     sketch.frameRate(30);
-    sketch.rectMode(sketch.CENTER);
 
     autoStretchP5(sketch, layout);
   };
@@ -51,7 +50,7 @@ const illusions = (sketch) => {
 
       sketch.noStroke();
       sketch.fill(foreColor);
-      sketch.rect(band.x, band.y, size * 0.7, sketch.height);
+      sketch.rect(band.x, 0, size * 0.7, sketch.height);
     }
 
     // draw shapes
@@ -62,7 +61,8 @@ const illusions = (sketch) => {
       sketch.stroke(backColor);
       sketch.noFill();
 
-      if (shape.form === 0) sketch.rect(shape.x, shape.y, size, size);
+      if (shape.form === 0)
+        sketch.rect(shape.x, shape.y - size / 2, size, size);
       else if (shape.form === 1) sketch.ellipse(shape.x, shape.y, size, size);
       else if (shape.form === 2) equi(shape.x, shape.y, size, 1);
     }
@@ -127,7 +127,7 @@ const illusions = (sketch) => {
   }
 
   function triHeight(hypo, a) {
-    return sketch.sqrt(sketch.pow(hypo, 2) - sketch.pow(a, 2));
+    return Math.sqrt(Math.pow(hypo, 2) - Math.pow(a, 2));
   }
 };
 
