@@ -12,6 +12,7 @@ import * as drawbot from "./drawbot";
 import * as revolutions from "./revolutions";
 import * as fittestBubleBath from "./fittestBubbleBath";
 import * as circleClock from "./circleClock";
+import * as circleClockTwo from "./circleClockTwo";
 import * as lorenz from "./lorenz";
 import * as cmyDance from "./cmyDance";
 
@@ -30,6 +31,7 @@ const sketches = [
   fittestBubleBath,
   lorenz,
   cmyDance,
+  circleClockTwo,
 ];
 
 const wrappedSketches = sketches.reduce((acc, cur) => {

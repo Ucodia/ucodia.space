@@ -21,6 +21,7 @@
     "react-router-dom": "^6.8.1",
     "react-sizeme": "^3.0.2",
     "styled-components": "^5.3.6",
+    "two.js": "^0.8.10",
     "u5js": "^0.6.1"
   },
   "devDependencies": {
