@@ -28,7 +28,7 @@ const Keyword = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
-  color: black;
+  color: ${(props) => (props.pending ? "grey" : "black")};
   background-color: white;
   opacity: 0.5;
   text-align: center;
@@ -37,9 +37,9 @@ const Keyword = styled.div`
 
 const GiphyVox = () => {
   const [gifUrl, setGifUrl] = useState("");
-  const [transcript, speech] = useSpeechToText();
+  const [transcript, pending, speech] = useSpeechToText();
   useEffect(() => {
-    if (!transcript) return;
+    if (!transcript || pending) return;
 
     async function fetchData() {
       const response = await giphy.search(transcript);
@@ -48,7 +48,7 @@ const GiphyVox = () => {
     }
 
     fetchData();
-  }, [transcript]);
+  }, [transcript, pending]);
 
   if (!speech) {
     return (
@@ -70,7 +70,9 @@ const GiphyVox = () => {
       ) : (
         <Container />
       )}
-      <Keyword>{transcript ? transcript : "say something..."}</Keyword>
+      <Keyword pending={pending}>
+        {transcript ? transcript : "say something..."}
+      </Keyword>
     </Container>
   );
 };

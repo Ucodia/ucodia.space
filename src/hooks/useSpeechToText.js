@@ -16,7 +16,7 @@ const createSpeechRecognition = () => {
     : null;
 
   if (recognition) {
-    recognition.continuous = true;
+    // recognition.continuous = true;
     recognition.interimResults = true;
   }
 
@@ -24,24 +24,48 @@ const createSpeechRecognition = () => {
 };
 
 const useSpeechToText = () => {
-  const [speech] = useState(createSpeechRecognition());
+  const [speech, setSpeech] = useState(createSpeechRecognition());
   const [transcript, setTranscript] = useState("");
+  const [pending, setPending] = useState(false);
   useEffect(() => {
-    if (speech) {
-      speech.onresult = ({ results }) => {
-        const firstResult = results[results.length - 1];
-        if (firstResult.isFinal) {
-          setTranscript(firstResult[0].transcript);
-        }
-      };
-      speech.start();
-    }
+    if (!speech) return;
+
+    const onSpeechStart = () => {
+      console.log("speech start");
+      setPending(true);
+    };
+
+    const onSpeechEnd = () => {
+      console.log("speech end");
+      setPending(false);
+      speech.stop();
+
+      speech.removeEventListener("speechstart", onSpeechStart);
+      speech.removeEventListener("speechend", onSpeechEnd);
+      speech.removeEventListener("result", onResult);
+
+      setSpeech(null);
+
+      const newSpeech = createSpeechRecognition();
+      setSpeech(newSpeech);
+    };
+
+    const onResult = (event) => {
+      setTranscript(event.results[0][0].transcript);
+    };
+
+    speech.addEventListener("speechstart", onSpeechStart);
+    speech.addEventListener("speechend", onSpeechEnd);
+    speech.addEventListener("result", onResult);
+
+    speech.start();
+
     return () => {
       if (speech) speech.stop();
     };
   }, [speech]);
 
-  return [transcript, speech];
+  return [transcript, pending, speech];
 };
 
 export default useSpeechToText;
