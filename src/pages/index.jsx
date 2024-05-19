@@ -5,6 +5,7 @@ import Zukunft from "./Zukunft";
 import Flowtime from "./Flowtime";
 import Conundrum from "./Conundrum";
 import LorenzSvg from "./LorenzSvg";
+import SpeechPage from "./Speech";
 import sketches from "./sketches";
 
 const pages = {
@@ -14,6 +15,7 @@ const pages = {
   flowtime: <Flowtime />,
   conundrum: <Conundrum />,
   "lorenz-svg": <LorenzSvg />,
+  speech: <SpeechPage />,
   ...sketches,
 };
 
