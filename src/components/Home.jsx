@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { singleDiamond } from "../pages/sketches/diamonds";
 import pages from "../pages";
+import mdxPages from "../mdx-pages";
 import U5Wrapper from "./U5Wrapper";
 
 const Container = styled.div`
@@ -57,7 +58,7 @@ const PageLink = styled(Link)`
   color: ${(props) => props.color};
 `;
 
-const links = Object.keys(pages)
+const links = Object.keys({ ...pages, ...mdxPages })
   .map((page) => ({
     type: "page",
     name: page,

@@ -1,10 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import mdx from "@mdx-js/rollup";
 import svgr from "vite-plugin-svgr";
 import { qrcode } from "vite-plugin-qrcode";
 
 export default defineConfig({
-  plugins: [react(), svgr(), qrcode()],
+  plugins: [react(), mdx(), svgr(), qrcode()],
   build: {
     sourcemap: true,
   },

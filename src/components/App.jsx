@@ -5,6 +5,7 @@ import Page from "./Page";
 import Home from "./Home";
 import Alert from "./Alert";
 import pages from "../pages";
+import mdxPages from "../mdx-pages";
 
 const FullScreen = styled.div`
   width: 100vw;
@@ -37,6 +38,15 @@ const App = () => {
                 <FullScreen>{pages[page]}</FullScreen>
               </Page>
             }
+          />
+        );
+      })}
+      {Object.keys(mdxPages).map((page) => {
+        return (
+          <Route
+            key={page}
+            path={`/${page}`}
+            element={<Page title={page}>{mdxPages[page]}</Page>}
           />
         );
       })}
