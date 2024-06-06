@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router } from "react-router-dom";
+import { MDXProvider } from "@mdx-js/react";
 import App from "./App";
 const StyleReset = createGlobalStyle`
   body {
@@ -20,7 +21,9 @@ const Root = () => (
   <>
     <StyleReset />
     <Router>
-      <App />
+      <MDXProvider>
+        <App />
+      </MDXProvider>
     </Router>
   </>
 );
